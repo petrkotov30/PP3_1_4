@@ -28,12 +28,11 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username+" не найден");
+            throw new UsernameNotFoundException(username + " не найден");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername()
                 , user.getPassword(), mapRolesToAuthorities(user.getRoles()));
