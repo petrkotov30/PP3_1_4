@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final SuccessUserHandler successUserHandler;
@@ -28,12 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/authenticated/**").authenticated()
-                .antMatchers("/showUserInfo").authenticated()
-                .antMatchers("/only_for_admins/**").hasRole("ADMIN")
-                .antMatchers("/read_profile/**").hasAuthority("READ_PROFILE")
+                .antMatchers("/").permitAll()
+                .antMatchers("styleTable.css").permitAll()
+                .antMatchers("/showUserInfo","styleTable.css").hasAnyRole("ADMIN","USER")
+                .antMatchers("/admin/**","styleTable.css").hasRole("ADMIN")
                 .and()
-                .formLogin()
+                .formLogin().successHandler(successUserHandler)
                 .and()
                 .logout()
                 .logoutSuccessUrl("/");

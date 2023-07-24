@@ -9,39 +9,23 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 import java.security.Principal;
 
 @RestController
-public class MainController {
+public class UserController {
     private final UserService userService;
 
     @Autowired
-    public MainController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/")
     public String homePage() {
-        return "hello world";
+        return "Привет всем, но если хочешь пройти даль!";
     }
-
-    @GetMapping("/authenticated")
-    public String pageForAuthenticatedUsers(Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        return "secured part of web service: " + user.getUsername() + " " + user.getEmail();
-    }
-
-    @GetMapping("/only_for_admins")
-    public String pageOnlyForAdmins() {
-        return "only_for_admins !";
-    }
-
-    @GetMapping("/read_profile")
-    public String pageReadProfile() {
-        return "read profile page";
-    }
-
 
     @GetMapping("/showUserInfo")
     public String showUSerInfo(Principal principal) {
         User user = userService.findByUsername(principal.getName());
         return user.toString();
     }
+
 }

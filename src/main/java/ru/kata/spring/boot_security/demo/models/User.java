@@ -100,7 +100,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
@@ -110,11 +110,10 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User with " +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + roles +
-                '}';
+                ", has role=" + roles;
     }
 }
