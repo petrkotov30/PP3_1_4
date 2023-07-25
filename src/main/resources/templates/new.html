@@ -5,7 +5,6 @@
     <title>Новый пользователь</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" th:href="@{../style/styleTable.css}">
 <form th:method="POST" th:action="@{/admin}" th:object="${user}"
       method="post" style="max-width: 600px; margin: 0 auto;">
     <input type="hidden" th:field="*{id}"/>
@@ -49,8 +48,7 @@
         </div>
     </div>
     <br/><br>
-    <input type="submit" class="btn btn-primary" value="OK"
-           onclick="window.location.href='/admin'"/>
+    <input type="submit" class="btn btn-primary" value="OK"/>
     <t>
     </t>
     <input type="button" value="Logout" onclick="window.location.href ='/logout'">
