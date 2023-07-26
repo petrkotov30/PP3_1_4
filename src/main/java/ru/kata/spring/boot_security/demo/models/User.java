@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @NotEmpty
     private String password;
     @Column(name = "email")
-    @Email()
+    @Email
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
