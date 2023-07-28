@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.kata</groupId>
-    <artifactId>spring-boot_security-demo</artifactId>
+    <artifactId>spring-boot_security-demo 3_1_4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot_security-demo</name>
     <description>Demo project for Spring Boot</description>
@@ -60,9 +60,19 @@
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope><!-- -->
+            <optional>true</optional>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,18 +40,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Query
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username + " не найден");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername()
-                , user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return user;
     }
 
     @Override
     public List<User> showAllUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Transactional
@@ -74,11 +80,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public void update(User userUpdate, Long id) {
+    public void update(User userUpdate,Long id) {
         User user = userRepository.getById(id);
         user.setUsername(userUpdate.getUsername());
         user.setEmail(userUpdate.getEmail());
-        user.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(userUpdate.getRoles());
         userRepository.save(user);
     }
