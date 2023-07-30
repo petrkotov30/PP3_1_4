@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> showAllUser() {
+    public List<User> findAllUser() {
         return userRepository.findAll();
     }
 
@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
 
     @Transactional
     @Override
@@ -80,12 +81,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public void update(User userUpdate,Long id) {
+    public void update(User userUpdated,Long id) {
         User user = userRepository.getById(id);
-        user.setUsername(userUpdate.getUsername());
-        user.setEmail(userUpdate.getEmail());
+        user.setUsername(userUpdated.getUsername());
+        user.setEmail(userUpdated.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(userUpdate.getRoles());
+        user.setRoles(userUpdated.getRoles());
         userRepository.save(user);
     }
+
 }

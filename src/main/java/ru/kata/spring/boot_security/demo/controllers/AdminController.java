@@ -27,14 +27,21 @@ public class AdminController {
 
     @GetMapping()
     public String showAllUsers(Model model, Principal principal) {
-        model.addAttribute("users", userService.showAllUser());
+        model.addAttribute("users", userService.findAllUser());
         model.addAttribute("admin", userService.getUserByUsername(principal.getName()));
         model.addAttribute("roles", roleService.findAll());
         return "users";
     }
 
+    @GetMapping("/info")
+    public String showAdminInfo(Model model, Principal principal) {
+        model.addAttribute("adminUser", userService.getUserByUsername(principal.getName()));
+        return "adminUser";
+    }
+
+
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user, Model model,Principal principal) {
+    public String newUser(@ModelAttribute("user") User user, Model model, Principal principal) {
         model.addAttribute("admin", userService.getUserByUsername(principal.getName()));
         model.addAttribute("roles", roleService.findAll());
         return "new";
@@ -49,12 +56,13 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable Long id) {
-        model.addAttribute("user", userService.findUser(id));
-        model.addAttribute("roles", roleService.findAll());
-        return "edit";
-    }
+//    @GetMapping("/{id}/edit")
+//    public String edit(Model model, @PathVariable Long id) {
+//        model.addAttribute("user", userService.findUser(id));
+//        model.addAttribute("roles", roleService.findAll());
+//        return "edit";
+//    }
+
     @GetMapping(value = "/{id}/update")
     public String update(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("user", userService.findUser(id));
@@ -62,7 +70,7 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, @PathVariable("id") Long id, BindingResult result) {
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, BindingResult result) {
         if (result.hasErrors()) {
             return "edit";
         }

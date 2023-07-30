@@ -13,7 +13,7 @@ public interface UserService {
 
     void add(User user);
 
-    List<User> showAllUser();
+    List<User> findAllUser();
 
     User getUserByUsername(String username);
 }

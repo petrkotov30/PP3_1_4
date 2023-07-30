@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Min(value = 0)
     private int age;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
+    //    @ManyToMany(fetch = FetchType.LAZY)
 //    @LazyCollection(LazyCollectionOption.EXTRA)
     @ManyToMany
     @Fetch(FetchMode.JOIN)
@@ -48,6 +48,15 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(String username, String password, String email, Set<Role> roles, String surname, int age) {
+        this.username = username;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+        this.age = age;
     }
 
     public String getSurname() {
@@ -66,14 +75,6 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public User(String username, String password, String email, Set<Role> roles, String surname, int age) {
-        this.username = username;
-        this.surname = surname;
-        this.password = password;
-        this.email = email;
-        this.roles = roles;
-        this.age = age;
-    }
 
     public Long getId() {
         return id;
