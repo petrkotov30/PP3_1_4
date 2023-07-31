@@ -70,8 +70,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void update(User userUpdated, Long id) {
-        userUpdated.setId(id);
-        userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
-        userRepository.save(userUpdated);
+        User user = userRepository.getById(id);
+        user.setId(userUpdated.getId());
+        if (userUpdated.getPassword().equals("")) {
+            user.setPassword(user.getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
+        }
+        user.setAge(userUpdated.getAge());
+        user.setUsername(userUpdated.getUsername());
+        user.setSurname(userUpdated.getSurname());
+        user.setEmail(userUpdated.getEmail());
+        user.setRoles(userUpdated.getRoles());
+        userRepository.save(user);
     }
 }
