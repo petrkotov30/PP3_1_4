@@ -55,12 +55,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
-    @Override
-    public User findUser(long id) {
-        return userRepository.findUserById(id);
-    }
-
     @Transactional
     @Override
     public void deleteById(Long id) {
