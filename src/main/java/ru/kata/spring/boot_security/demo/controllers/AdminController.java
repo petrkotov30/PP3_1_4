@@ -1,17 +1,23 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.boot_security.demo.utill.UserNotCreatedException;
+import ru.kata.spring.boot_security.demo.utill.UserNotFoundException;
+import ru.kata.spring.boot_security.demo.utill.UserResponseError;
 
-import java.security.Principal;
+import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
@@ -22,44 +28,67 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping()
-    public String showAllUsers(Model model, Principal principal) {
-        model.addAttribute("users", userService.findAllUser());
-        model.addAttribute("admin", userService.getUserByUsername(principal.getName()));
-        model.addAttribute("roles", roleService.findAll());
-        return "users";
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.findAllUser();
     }
 
-    @GetMapping("/info")
-    public String showAdminInfo(Model model, Principal principal) {
-        model.addAttribute("adminUser", userService.getUserByUsername(principal.getName()));
-        return "adminUser";
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> showOne(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userService.findUser(id));
+    }
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>>getAllRoles() {
+        return ResponseEntity.ok(roleService.findAll());
     }
 
-
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user, Model model, Principal principal) {
-        model.addAttribute("admin", userService.getUserByUsername(principal.getName()));
-        model.addAttribute("roles", roleService.findAll());
-        return "new";
-    }
-
-    @PostMapping()
-    public String createUser(@ModelAttribute("user") User user) {
+    @PostMapping("users/new")
+    public ResponseEntity<HttpStatus> createUser(@RequestBody User user) {
         userService.add(user);
-        return "redirect:/admin";
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+    @GetMapping("/currentUser")
+    public ResponseEntity<User> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok((User) authentication.getPrincipal());
     }
 
-
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
-        userService.update(user, id);
-        return "redirect:/admin";
+    @PatchMapping("users/edit")
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody User user) {
+        userService.update(user);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}/delete")
-    public String delete(@PathVariable Long id) {
+    @DeleteMapping("/users/{id}/delete")
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
         userService.deleteById(id);
-        return "redirect:/admin";
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<UserResponseError> handleException(UserNotFoundException e) {
+        UserResponseError response = new UserResponseError(
+                "User with this id was not found!");
+        // В HTTP ответа будет (response) и статус в заголовке (404)
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // 404 not found
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<UserResponseError> handleException(UserNotCreatedException e) {
+        UserResponseError response = new UserResponseError(
+                e.getMessage());
+        // В HTTP ответа будет (response) и статус в заголовке (500)
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 500
     }
 }
+
+
+//        if (bindingResult.hasErrors()) {
+//            StringBuilder message = new StringBuilder();
+//            List<FieldError> listError = bindingResult.getFieldErrors();
+//            for (FieldError fieldError : listError) {
+//                message.append(fieldError.getField()).append(" - ")
+//                        .append(fieldError.getDefaultMessage());
+//            }
+//            throw new UserNotCreatedException(message.toString());
+//        }

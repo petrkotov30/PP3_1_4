@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repostitories.UserRepository;
+import ru.kata.spring.boot_security.demo.utill.UserNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -57,8 +59,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional(readOnly = true)
     @Override
-    public User findUser(long id) {
-        return userRepository.findUserById(id);
+    public User findUser(Long id) {
+        Optional<User> foundUser = userRepository.findById(id);
+        return foundUser.orElseThrow(UserNotFoundException::new);
     }
 
     @Transactional
@@ -69,19 +72,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public void update(User userUpdated, Long id) {
-        User user = userRepository.getById(id);
-        user.setId(userUpdated.getId());
-        user.setAge(userUpdated.getAge());
-        user.setUsername(userUpdated.getUsername());
-        user.setSurname(userUpdated.getSurname());
-        user.setEmail(userUpdated.getEmail());
-        user.setRoles(userUpdated.getRoles());
+    public void update(User userUpdated) {
+        userUpdated.setAge(userUpdated.getAge());
+        userUpdated.setUsername(userUpdated.getUsername());
+        userUpdated.setSurname(userUpdated.getSurname());
+        userUpdated.setEmail(userUpdated.getEmail());
+        userUpdated.setRoles(userUpdated.getRoles());
         if (userUpdated.getPassword().equals("")) {
-            user.setPassword(user.getPassword());
+            userUpdated.setPassword(userUpdated.getPassword());
         } else {
-            user.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
+            userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
         }
-        userRepository.save(user);
+        userRepository.save(userUpdated);
     }
+
 }

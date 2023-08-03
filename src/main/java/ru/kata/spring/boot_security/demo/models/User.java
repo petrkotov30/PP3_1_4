@@ -2,9 +2,6 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,14 +18,15 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
     @Column(name = "username")
+    @Size(min = 2, max = 20, message = "имя должно содержать от 2 до 20 символов")
     @NotEmpty
     private String username;
     @Column(name = "surname")
+    @Size(min = 2, max = 20, message = "фамилия должна содержать от 2 до 20 символов")
     @NotEmpty
-    @Size(min = 2, max = 20)
     private String surname;
     @Column(name = "password")
-    @NotEmpty
+    @NotEmpty(message = "пароль не может быть пустым")
     private String password;
     @Column(name = "email")
     @NotEmpty
@@ -36,10 +34,8 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "age")
     @Min(value = 0)
-    private int age;
+    private Integer age;
 
-    //    @ManyToMany(fetch = FetchType.LAZY)
-//    @LazyCollection(LazyCollectionOption.EXTRA)
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",
@@ -50,7 +46,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, String email, Set<Role> roles, String surname, int age) {
+    public User(String username, String password, String email, Set<Role> roles, String surname, Integer age) {
         this.username = username;
         this.surname = surname;
         this.password = password;
