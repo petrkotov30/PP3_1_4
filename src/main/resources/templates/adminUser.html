@@ -91,19 +91,33 @@
                                     <form id="newUserForm">
                                         <div class="form-group text-center">
                                             <div class="col-5 mx-auto ">
-                                                <label for="emailAddNewUser"><b>Email</b></label>
-                                                <input type="email" class="form-control" placeholder="Email"
-                                                       id="emailAddNewUser" name="email" required>
+                                                <label for="nameNewUserEdit"><b>First name</b></label>
+                                                <input name="name" type="text" class="form-control"
+                                                       id="nameNewUserEdit" required>
                                                 <br>
-                                                <label for="passwordAddNewUser"><b>Password</b></label>
-                                                <input type="password" class="form-control" placeholder="Password"
-                                                       id="passwordAddNewUser" name="password" required>
+                                                <label for="surnameNewUserEdit"><b>Last name</b></label>
+                                                <input name="surname" type="text" class="form-control"
+                                                       id="surnameNewUserEdit" required>
                                                 <br>
-                                                <label for="rolesAddNewUser"><b>Role</b></label>
+                                                <label for="ageNewUserEdit"><b>Age</b></label>
+                                                <input name="age" type="number" class="form-control"
+                                                       id="ageNewUserEdit" required>
+                                                <br>
+                                                <label for="emailNewUserEdit"><b>Email</b></label>
+                                                <input name="email" type="email" class="form-control"
+                                                       id="emailNewUserEdit" required>
+                                                <br>
+                                                <label for="passwordNewUserEdit"><b>Password</b></label>
+                                                <input name="password" type="password" class="form-control"
+                                                       id="passwordNewUserEdit">
+                                                <br>
+                                                <label for="rolesNewUser"><b>Role</b></label>
                                                 <div class="d-flex justify-content-center">
-                                                    <select id="rolesAddNewUser" class="custom-select" size="3" multiple
-                                                            required>
-                                                    </select>
+                                                    <label for="rolesNewUser"></label><select id="rolesNewUser"
+                                                                                              class="custom-select"
+                                                                                              size="2" multiple
+                                                                                              required>
+                                                </select>
                                                 </div>
                                                 <div class="d-flex justify-content-center" style="padding: 15px">
                                                     <button type="submit" class="btn btn-success">Add new user</button>
@@ -192,13 +206,29 @@
                 <fieldset disabled>
                     <div class="form-group text-center">
                         <div class="col-6 mx-auto">
-                            <label for="idCurrentUserDelete"><b>ID</b></label>
-                            <input name="id" type="text" class="form-control"
-                                   id="idCurrentUserDelete">
+                            <label for="idCurrentUserEdit"><b>ID</b></label>
+                            <input name="id" disabled type="text" class="form-control"
+                                   id="idDeleteUserEdit">
                             <br>
-                            <label for="emailCurrentUserDelete"><b>Email</b></label>
+                            <label for="nameCurrentUserEdit"><b>First name</b></label>
+                            <input name="name" type="text" class="form-control"
+                                   id="nameDeleteUserEdit" required>
+                            <br>
+                            <label for="surnameCurrentUserEdit"><b>Last name</b></label>
+                            <input name="surname" type="text" class="form-control"
+                                   id="surnameDeleteUserEdit" required>
+                            <br>
+                            <label for="ageCurrentUserEdit"><b>Age</b></label>
+                            <input name="age" type="number" class="form-control"
+                                   id="ageDeleteUserEdit" required>
+                            <br>
+                            <label for="emailCurrentUserEdit"><b>Email</b></label>
                             <input name="email" type="email" class="form-control"
-                                   id="emailCurrentUserDelete">
+                                   id="emailDeleteUserEdit" required>
+                            <br>
+                            <label for="passwordCurrentUserEdit"><b>Password</b></label>
+                            <input name="password" type="password" class="form-control"
+                                   id="passwordDeleteUserEdit">
                             <br>
                             <label for="rolesDeleteUser"><b>Role</b></label>
                             <div class="d-flex justify-content-center">

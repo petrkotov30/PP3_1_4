@@ -77,8 +77,6 @@ function makeTr(data) {
     newUsersTableBody += `<tr>
     <td>${data.id}</td>
     <td>${data.email}</td>
-    <td>${data.email}</td>
-    <td>${data.email}</td>
     <td>
     <span>`;
     data.roles.forEach(e => {
@@ -145,8 +143,8 @@ const on = (element, event, selector, handler) => {
 
 //изменение юзера
 const idEdit = document.getElementById('idCurrentUserEdit')
-const firstNameEdit = document.getElementById('firstNameCurrentUserEdit')
-const lastNameEdit = document.getElementById('lastNameCurrentUserEdit')
+const firstNameEdit = document.getElementById('nameCurrentUserEdit')
+const lastNameEdit = document.getElementById('surnameCurrentUserEdit')
 const ageEdit = document.getElementById('ageCurrentUserEdit')
 const emailEdit = document.getElementById('emailCurrentUserEdit')
 const passwordEdit = document.getElementById('passwordCurrentUserEdit')
