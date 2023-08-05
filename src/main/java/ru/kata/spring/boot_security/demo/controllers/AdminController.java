@@ -37,49 +37,51 @@ public class AdminController {
     public ResponseEntity<User> showOne(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.findUser(id));
     }
+
     @GetMapping("/roles")
-    public ResponseEntity<List<Role>>getAllRoles() {
+    public ResponseEntity<List<Role>> getAllRoles() {
         return ResponseEntity.ok(roleService.findAll());
     }
 
-    @PostMapping("users/new")
-    public ResponseEntity<HttpStatus> createUser(@RequestBody User user) {
+    @PostMapping("/users/new")
+    public ResponseEntity<HttpStatus> createUser(User user) {
         userService.add(user);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
+
     @GetMapping("/currentUser")
     public ResponseEntity<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ResponseEntity.ok((User) authentication.getPrincipal());
     }
 
-    @PatchMapping("users/edit")
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody User user) {
+    @PatchMapping("/users/edit")
+    public ResponseEntity<HttpStatus> updateUser(User user) {
         userService.update(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/{id}/delete")
+    @DeleteMapping("/users/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-    @ExceptionHandler
-    private ResponseEntity<UserResponseError> handleException(UserNotFoundException e) {
-        UserResponseError response = new UserResponseError(
-                "User with this id was not found!");
-        // В HTTP ответа будет (response) и статус в заголовке (404)
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // 404 not found
-    }
-
-    @ExceptionHandler
-    private ResponseEntity<UserResponseError> handleException(UserNotCreatedException e) {
-        UserResponseError response = new UserResponseError(
-                e.getMessage());
-        // В HTTP ответа будет (response) и статус в заголовке (500)
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 500
-    }
+//
+//    @ExceptionHandler
+//    private ResponseEntity<UserResponseError> handleException(UserNotFoundException e) {
+//        UserResponseError response = new UserResponseError(
+//                "User with this id was not found!");
+//        // В HTTP ответа будет (response) и статус в заголовке (404)
+//        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // 404 not found
+//    }
+//
+//    @ExceptionHandler
+//    private ResponseEntity<UserResponseError> handleException(UserNotCreatedException e) {
+//        UserResponseError response = new UserResponseError(
+//                e.getMessage());
+//        // В HTTP ответа будет (response) и статус в заголовке (500)
+//        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 500
+//    }
 }
 
 

@@ -19,14 +19,14 @@ currentUser.then(data => makeNavbarWithCurrentUser(data))
     .catch(error => console.log(error));
 //реализация заполнения навбара
 const makeNavbarWithCurrentUser = (data) => {
-    let currentUserName = `${data.name}`;
+    let currentUserName = `${data.username}`;
     let rolesCU = ``;
     data.roles.forEach(e => {
         let roleStr = `${e.name}`;
         let newStr = roleStr.replace('ROLE_', ' ');
         rolesCU += `${newStr}`;
     });
-    document.getElementById('navbarEmail').innerHTML = currentUserName;
+    document.getElementById('navbarName').innerHTML = currentUserName;
     document.getElementById('navbarRoles').innerHTML = rolesCU;
 };
 
@@ -44,7 +44,7 @@ function makeUsersTableBody(data) {
     for (let i = 0; i < data.length; i++) {
         allUsersTableBody += `<tr>
         <td>${data[i].id}</td>
-        <td>${data[i].name}</td>
+        <td>${data[i].username}</td>
         <td>${data[i].surname}</td>
         <td>${data[i].age}</td>
         <td>${data[i].email}</td>
@@ -76,6 +76,9 @@ function makeTr(data) {
     let newUsersTableBody = ''
     newUsersTableBody += `<tr>
     <td>${data.id}</td>
+    <td>${data.name}</td>
+    <td>${data.surname}</td>
+    <td>${data.age}</td>
     <td>${data.email}</td>
     <td>
     <span>`;
@@ -116,9 +119,9 @@ async function createNewUser(event) {
         method: 'POST',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
         body: JSON.stringify({
-            name:formNU.name.value,
-            surname:formNU.surname.value,
-            age:formNU.age.value,
+            name: formNU.name.value,
+            surname: formNU.surname.value,
+            age: formNU.age.value,
             email: formNU.email.value,
             password: formNU.email.value,
             roles: rolesSelected
@@ -182,6 +185,7 @@ document.getElementById('editForm').addEventListener('submit', e => {
             rolesEditCell += rolesEd.options[i].innerHTML + ' '
         }
     }
+
     fetch('/admin/users/edit', {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -194,7 +198,6 @@ document.getElementById('editForm').addEventListener('submit', e => {
             password: passwordEdit.value,
             roles: rolesEditSelected
         })
-
     })
         .then(response => response.json())
     rowEdit.children[1].innerHTML = firstNameEdit.value
@@ -206,17 +209,18 @@ document.getElementById('editForm').addEventListener('submit', e => {
 })
 
 //удаление юзера
-const idDelete = document.getElementById('idCurrentUserDelete')
-const firstNameDelete = document.getElementById('firstNameCurrentUserDelete')
-const lastNameDelete = document.getElementById('lastNameCurrentUserDelete')
-const ageDelete = document.getElementById('ageCurrentUserDelete')
-const emailDelete = document.getElementById('emailCurrentUserDelete')
+const idDelete = document.getElementById('idDelUser')
+const firstNameDelete = document.getElementById('nameDeleteUserEdit')
+const lastNameDelete = document.getElementById('surnameDeleteUserEdit')
+const ageDelete = document.getElementById('ageDeleteUserEdit')
+const emailDelete = document.getElementById('emailDeleteUserEdit')
 const rolesDelete = document.getElementById('rolesDeleteUser')
 
 let rowDelete = null
 
 on(document, 'click', '#deleteUserButton', e => {
     rowDelete = e.parentNode.parentNode
+    console.log(rowDelete)
     idDelete.value = rowDelete.children[0].innerHTML
     firstNameDelete.value = rowDelete.children[1].innerHTML
     lastNameDelete.value = rowDelete.children[2].innerHTML
@@ -236,7 +240,11 @@ on(document, 'click', '#deleteUserButton', e => {
 
 document.getElementById('deleteForm').addEventListener('submit', e => {
     e.preventDefault()
-    fetch('/admin/users/delete/' + rowDelete.children[0].innerHTML, {
+    console.log('x')
+    console.log($(this).data('user'))
+    console.log($('#idDelUser').val())
+    console.log('y')
+    fetch('/admin/users/' + rowDelete.children[0].innerHTML+'/delete', {
         method: 'DELETE'
     }).then(() => {
         document.getElementById('closeDelete').click();

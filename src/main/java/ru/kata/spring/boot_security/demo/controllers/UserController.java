@@ -20,9 +20,9 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    @GetMapping()
+    @GetMapping("/currentUser")
     public ResponseEntity<User> showUserInfo() {
+        System.out.println("test");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ResponseEntity.ok((User) authentication.getPrincipal());
     }

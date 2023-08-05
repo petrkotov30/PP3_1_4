@@ -10,14 +10,14 @@ currentUser.then(data => makeCurrentUserTable(data))
 const makeCurrentUserTable = (data) => {
     let currentUserTableBody = `<tr>
     <td>${data.id}</td>
-    <td>${data.email}</td>
-    <td>${data.age}</td>
+    <td>${data.username}</td>
     <td>${data.surname}</td>
-
+    <td>${data.age}</td>
+    <td>${data.email}</td>    
     <td>
     <span>`;
     data.roles.forEach(e => {
-        let roleStr = `${e.name}`;
+        let roleStr = `${e.userName}`;
         let newStr = roleStr.replace('ROLE_', ' ');
         currentUserTableBody += `${newStr}`;
     });
@@ -28,13 +28,13 @@ const makeCurrentUserTable = (data) => {
 };
 // реализация заполнения навбара
 const makeNavbarWithCurrentUser = (data) => {
-    let currentUserEmail = `${data.email}`;
+    let currentUsername = `${data.username}`;
     let rolesCU = ``;
     data.roles.forEach(e => {
         let roleStr = `${e.name}`;
         let newStr = roleStr.replace('ROLE_', ' ');
         rolesCU += `${newStr}`;
     });
-    document.getElementById('navbarEmail').innerHTML = currentUserEmail;
+    document.getElementById('navbarName').innerHTML = currentUsername;
     document.getElementById('navbarRoles').innerHTML = rolesCU;
 };

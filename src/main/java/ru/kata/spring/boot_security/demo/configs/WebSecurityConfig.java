@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final SuccessUserHandler successUserHandler;

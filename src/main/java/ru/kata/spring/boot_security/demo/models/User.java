@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -139,7 +140,7 @@ public class User implements UserDetails {
 
     public String toStringRoles() {
         StringBuilder x = new StringBuilder();
-        roles.stream().map(Role::getName).forEach(s -> x.append(s).append(" "));
+        roles.stream().map(Role::getName).forEach(s -> x.append(s.replace("ROLE_","")).append(" "));
         return x.toString();
     }
 

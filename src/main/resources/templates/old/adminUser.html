@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -13,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <p class="h4 text-white">
-        <b><span id="navbarEmail" class="align-middle"></span></b>
+        <b><span id="navbarName" class="align-middle"></span></b>
         <span class="align-middle">with roles:</span>
         <span id="navbarRoles" class="align-middle"></span>
     </p>
@@ -92,7 +91,7 @@
                                         <div class="form-group text-center">
                                             <div class="col-5 mx-auto ">
                                                 <label for="nameNewUserEdit"><b>First name</b></label>
-                                                <input name="name" type="text" class="form-control"
+                                                <input name="Username" type="text" class="form-control"
                                                        id="nameNewUserEdit" required>
                                                 <br>
                                                 <label for="surnameNewUserEdit"><b>Last name</b></label>
@@ -155,7 +154,7 @@
                                    id="idCurrentUserEdit">
                             <br>
                             <label for="nameCurrentUserEdit"><b>First name</b></label>
-                            <input name="name" type="text" class="form-control"
+                            <input name="userName" type="text" class="form-control"
                                    id="nameCurrentUserEdit" required>
                             <br>
                             <label for="surnameCurrentUserEdit"><b>Last name</b></label>
@@ -206,29 +205,35 @@
                 <fieldset disabled>
                     <div class="form-group text-center">
                         <div class="col-6 mx-auto">
-                            <label for="idCurrentUserEdit"><b>ID</b></label>
-                            <input name="id" disabled type="text" class="form-control"
-                                   id="idDeleteUserEdit">
+                            <label for="idDelUser">
+                                <b>ID</b>
+                            </label>
+                            <input name="id" disabled type="text" class="form-control" id="idDelUser">
+
                             <br>
                             <label for="nameCurrentUserEdit"><b>First name</b></label>
-                            <input name="name" type="text" class="form-control"
-                                   id="nameDeleteUserEdit" required>
+                            <label for="nameDeleteUserEdit"></label><input name="userName" type="text"
+                                                                           class="form-control"
+                                                                           id="nameDeleteUserEdit" required>
                             <br>
                             <label for="surnameCurrentUserEdit"><b>Last name</b></label>
-                            <input name="surname" type="text" class="form-control"
-                                   id="surnameDeleteUserEdit" required>
+                            <label for="surnameDeleteUserEdit"></label><input name="surname" type="text"
+                                                                              class="form-control"
+                                                                              id="surnameDeleteUserEdit" required>
                             <br>
                             <label for="ageCurrentUserEdit"><b>Age</b></label>
-                            <input name="age" type="number" class="form-control"
-                                   id="ageDeleteUserEdit" required>
+                            <label for="ageDeleteUserEdit"></label><input name="age" type="number" class="form-control"
+                                                                          id="ageDeleteUserEdit" required>
                             <br>
                             <label for="emailCurrentUserEdit"><b>Email</b></label>
-                            <input name="email" type="email" class="form-control"
-                                   id="emailDeleteUserEdit" required>
+                            <label for="emailDeleteUserEdit"></label><input name="email" type="email"
+                                                                            class="form-control"
+                                                                            id="emailDeleteUserEdit" required>
                             <br>
                             <label for="passwordCurrentUserEdit"><b>Password</b></label>
-                            <input name="password" type="password" class="form-control"
-                                   id="passwordDeleteUserEdit">
+                            <label for="passwordDeleteUserEdit"></label><input name="password" type="password"
+                                                                               class="form-control"
+                                                                               id="passwordDeleteUserEdit">
                             <br>
                             <label for="rolesDeleteUser"><b>Role</b></label>
                             <div class="d-flex justify-content-center">
@@ -242,7 +247,7 @@
             <div class="modal-footer">
                 <form id="deleteForm">
                     <button type="button" class="btn btn-secondary" id="closeDelete" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="deleteUserButton">Delete</button>
                 </form>
             </div>
         </div>
@@ -261,6 +266,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-<script src="/js/admin.js"></script>
+<script src="/js/old/admin.js"></script>
 </body>
 </html>
