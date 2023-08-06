@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-4">
                             <div class="modal-body">
-                                <form th:method="POST" th:action="@{/admin}" th:object="${user}">
+                                <form th:method="POST" th:action="@{/templates/admin}" th:object="${user}">
                                     <input type="hidden" th:field="*{id}" id="id">
                                     <div class="mb-3">
                                         <label for="newUsername" class="form-label">First name</label>
