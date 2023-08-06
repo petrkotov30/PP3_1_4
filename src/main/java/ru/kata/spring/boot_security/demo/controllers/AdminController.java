@@ -57,6 +57,7 @@ public class AdminController {
 
     @PatchMapping("/users/edit")
     public ResponseEntity<HttpStatus> updateUser(User user) {
+        System.out.println(getAllRoles());
         userService.update(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
