@@ -116,12 +116,12 @@
                                     <input type="password" class="form-control" id="passNewUser" name="password"
                                            placeholder="Enter password">
                                 </div>
-                                <div class="d-flex justify-content-center">
-                                    <label for="rolesNewUser"></label><select id="rolesNewUser"
-                                                                              class="custom-select"
-                                                                              size="2" multiple
-                                                                              required>
-                                </select>
+                                <div class="form-group">
+                                    <label for="rolesNewUser">Roles: </label>
+                                    <select class="custom-select" name="roles" id="rolesNewUser" multiple>
+                                        <option value=2>ADMIN</option>
+                                        <option value=1>USER</option>
+                                    </select>
                                 </div>
                                 <button type="button" class="btn btn-success" id="btnNewUser">Add new user</button>
                             </form>
