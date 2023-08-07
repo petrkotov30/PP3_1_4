@@ -26,13 +26,13 @@ public class WelcomeController {
 
     @GetMapping("/admin")
     public String printAdminPage (ModelMap model, Authentication authentication){
-        model.addAttribute("nawUser",(User)authentication.getPrincipal());
+        model.addAttribute("nawUser",authentication.getPrincipal());
         return "admin/aUsers";
     }
 
     @GetMapping("/user")
     public String printUserPage (ModelMap model, Authentication authentication){
-        model.addAttribute("nawUser",(User)authentication.getPrincipal());
+        model.addAttribute("nawUser",(User)authentication.getPrincipal()); //кастинг нужен для отображения head в aUsers.html
         return "admin/aUsers";
     }
 

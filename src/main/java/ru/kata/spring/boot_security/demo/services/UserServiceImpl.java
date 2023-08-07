@@ -44,10 +44,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
 
-    @Override
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
 
 
     @Transactional
