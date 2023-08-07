@@ -60,15 +60,7 @@ $(document).on("click", "#btnNewUser", function () {
     });
 });
 
-const on = (element, event, selector, handler) => {
-    element.addEventListener(event, e => {
-        if (e.target.closest(selector)) {
-            handler(e.target)
-        }
-    })
-}
-
-// table
+// таблица
 function setAdminTable(result){
     $('#adminTable').empty()
     let role = '';
@@ -82,7 +74,7 @@ function setAdminTable(result){
             $('<td>').text(user.surname),
             $('<td>').text(user.age),
             $('<td>').text(user.email),
-            $('<td>').text(role.replace("ROLE_","")),
+            $('<td>').text(role.replaceAll("ROLE_"," ")),
             $('<td>').append($('<button>').text("Edit").attr({
                 "type": "button",
                 "class": "btn btn-info edit",
@@ -100,7 +92,7 @@ function setAdminTable(result){
     })
 }
 
-//left Panel
+//левая панель
 function setRolePanel(authUser){
     let roleStr = ''
     $.each(authUser.roles,function (i,role){
@@ -117,7 +109,7 @@ function setRolePanel(authUser){
     roleStr=''
 }
 
-// modal edit
+// модалка edit
 $(document).on('click','.edit',function () {
     let user = $(this).data('user');
     $('#idEditUser').val(user.id);
@@ -125,7 +117,7 @@ $(document).on('click','.edit',function () {
     $('#lastNameEditUser').val(user.surname);
     $('#ageEditUser').val(user.age);
     $('#emailEditUser').val(user.email);
-    $('#passEditUser').val('');
+    $('#passEditUser').val(null);
     $('#editRoles').val(user.roles);
 })
 
@@ -143,7 +135,7 @@ $(document).on('click','#btnEditUser',function () {
     });
 })
 
-//modal  delete
+//модалка delete
 $(document).on('click','.delete',function () {
     let user = $(this).data('user');
     $('#idDelUser').val(user.id);

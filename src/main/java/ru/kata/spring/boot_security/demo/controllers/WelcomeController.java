@@ -16,11 +16,6 @@ public class WelcomeController {
         this.userService = userService;
     }
 
-//    @GetMapping()
-//    public String homePage() {
-//        return "index";
-//    }
-
     @GetMapping()
     public String getHomePage() {
         if (userService.findAllUser().isEmpty()) {
@@ -42,10 +37,9 @@ public class WelcomeController {
     }
 
     public void addFirstUser(){
-        System.out.println(11);
         User user = new User();
-        user.setUsername("Admin");
-        user.setSurname("Admin");
+        user.setUsername("admin");
+        user.setSurname("admin");
         user.setAge(25);
         user.setEmail("admin@mail.ru");
         user.setPassword("admin");

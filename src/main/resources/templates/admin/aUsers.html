@@ -92,32 +92,32 @@
                             <br>
                             <form id="formAddUser">
                                 <div class="form-group">
-                                    <label for="nameNewUser">Name</label>
+                                    <label for="nameNewUser"><b>First name</b></label>
                                     <input type="text" class="form-control" id="nameNewUser" name="username"
                                            placeholder="Enter name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastNameNewUser">Surname:</label>
+                                    <label for="lastNameNewUser"><b>Last name</b></label>
                                     <input type="text" class="form-control" id="lastNameNewUser" name="surname"
                                            placeholder="Enter surname">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ageNewUser">Age:</label>
+                                    <label for="ageNewUser"><b>Age</b></label>
                                     <input type="number" class="form-control" id="ageNewUser" name="age"
                                            placeholder="Enter age">
                                 </div>
                                 <div class="form-group">
-                                    <label for="emailNewUser">Email:</label>
+                                    <label for="emailNewUser"><b>Email</b></label>
                                     <input type="email" class="form-control" id="emailNewUser" name="email"
                                            placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="passNewUser">Pass:</label>
+                                    <label for="passNewUser"><b>Password</b></label>
                                     <input type="password" class="form-control" id="passNewUser" name="password"
                                            placeholder="Enter password">
                                 </div>
                                 <div class="form-group">
-                                    <label for="rolesNewUser">Roles: </label>
+                                    <label for="rolesNewUser"><b>Role</b></label>
                                     <select class="custom-select" name="roles" id="rolesNewUser" multiple>
                                         <option value=2>ADMIN</option>
                                         <option value=1>USER</option>
@@ -134,7 +134,7 @@
 
         <!--user page-->
         <div class="tab-pane fade" id="userPage" role="tabpanel" aria-labelledby="userTab">
-            <h1>User information-page</h1>
+            <h2>User information-page</h2>
             <div class="card" style="background-color: white">
                 <div class="card-header">
                     About user
@@ -165,9 +165,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 <!--Modal windows-->
@@ -191,37 +189,38 @@
                         <form id="formEditUser">
                             <!--id-->
                             <div class="form-group">
-                                <label for="idEditUser" class="col-form-label">ID</label>
+                                <label for="idEditUser" class="col-form-label"><b>ID</b></label>
                                 <input type="text" class="form-control" id="idEditUser" name="id" readonly>
                             </div>
                             <!--name-->
                             <div class="form-group">
-                                <label for="nameEditUser">Name</label>
+                                <label for="nameEditUser"><b>First name</b></label>
                                 <input type="text" class="form-control" id="nameEditUser" name="username">
                             </div>
                             <!--lastName-->
                             <div class="form-group">
-                                <label for="lastNameEditUser">Surname: </label>
+                                <label for="lastNameEditUser"><b>Last name</b></label>
                                 <input type="text" class="form-control" id="lastNameEditUser" name="surname">
                             </div>
                             <!--age-->
                             <div class="form-group">
-                                <label for="ageEditUser">Age: </label>
+                                <label for="ageEditUser"><b>Age</b></label>
                                 <input type="number" class="form-control" id="ageEditUser" name="age">
                             </div>
                             <!--email-->
                             <div class="form-group">
-                                <label for="emailEditUser">Email:</label>
+                                <label for="emailEditUser"><b>Email</b></label>
                                 <input type="email" class="form-control" id="emailEditUser" name="email">
                             </div>
                             <!--pass-->
                             <div class="form-group">
-                                <label for="passEditUser">Pass: </label>
+                                <label for="passEditUser"><b>Password</b></label>
                                 <input type="password" class="form-control" id="passEditUser" name="password">
+                                <option value=""></option>
                             </div>
                             <!--roles-->
                             <div class="form-group">
-                                <label for="editRoles">Roles: </label>
+                                <label for="editRoles"><b>Role</b></label>
                                 <select class="custom-select" name="roles" id="editRoles" multiple>
                                     <option value=2>ADMIN</option>
                                     <option value=1>USER</option>
@@ -248,7 +247,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delModalTitle">Edit user</h5>
+                    <h5 class="modal-title" id="delModalTitle">Delete user</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -259,32 +258,32 @@
                         <form id="formDeleteUser">
                             <!--id-->
                             <div class="form-group">
-                                <label for="idDelUser" class="col-form-label">ID</label>
+                                <label for="idDelUser" class="col-form-label"><b>ID</b></label>
                                 <input type="text" class="form-control" id="idDelUser" readonly>
                             </div>
                             <!--name-->
                             <div class="form-group">
-                                <label for="nameDelUser">Name</label>
+                                <label for="nameDelUser"><b>First name</b></label>
                                 <input type="text" class="form-control" id="nameDelUser" readonly>
                             </div>
                             <!--lastName-->
                             <div class="form-group">
-                                <label for="lastNameDelUser">Surname: </label>
+                                <label for="lastNameDelUser"><b>Last name</b></label>
                                 <input type="text" class="form-control" id="lastNameDelUser" readonly>
                             </div>
                             <!--age-->
                             <div class="form-group">
-                                <label for="ageDelUser">Age: </label>
+                                <label for="ageDelUser"><b>Age</b></label>
                                 <input type="number" class="form-control" id="ageDelUser" readonly>
                             </div>
                             <!--email-->
                             <div class="form-group">
-                                <label for="usernameDelUser">Email:</label>
+                                <label for="usernameDelUser"><b>Email</b></label>
                                 <input type="email" class="form-control" id="usernameDelUser" readonly>
                             </div>
                             <!--role(roles)-->
                             <div class="form-group">
-                                <label for="roleDelUser">Roles</label>
+                                <label for="roleDelUser"><b>Role</b></label>
                                 <input type="text" class="form-control" id="roleDelUser" readonly name="roles">
                             </div>
                             <br>

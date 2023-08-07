@@ -10,9 +10,6 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
-import ru.kata.spring.boot_security.demo.utill.UserNotCreatedException;
-import ru.kata.spring.boot_security.demo.utill.UserNotFoundException;
-import ru.kata.spring.boot_security.demo.utill.UserResponseError;
 
 import java.util.List;
 
@@ -57,7 +54,6 @@ public class AdminController {
 
     @PatchMapping("/users/edit")
     public ResponseEntity<HttpStatus> updateUser(User user) {
-        System.out.println(getAllRoles());
         userService.update(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -67,31 +63,4 @@ public class AdminController {
         userService.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-//
-//    @ExceptionHandler
-//    private ResponseEntity<UserResponseError> handleException(UserNotFoundException e) {
-//        UserResponseError response = new UserResponseError(
-//                "User with this id was not found!");
-//        // В HTTP ответа будет (response) и статус в заголовке (404)
-//        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // 404 not found
-//    }
-//
-//    @ExceptionHandler
-//    private ResponseEntity<UserResponseError> handleException(UserNotCreatedException e) {
-//        UserResponseError response = new UserResponseError(
-//                e.getMessage());
-//        // В HTTP ответа будет (response) и статус в заголовке (500)
-//        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 500
-//    }
 }
-
-
-//        if (bindingResult.hasErrors()) {
-//            StringBuilder message = new StringBuilder();
-//            List<FieldError> listError = bindingResult.getFieldErrors();
-//            for (FieldError fieldError : listError) {
-//                message.append(fieldError.getField()).append(" - ")
-//                        .append(fieldError.getDefaultMessage());
-//            }
-//            throw new UserNotCreatedException(message.toString());
-//        }
