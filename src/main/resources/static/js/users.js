@@ -104,7 +104,10 @@ function setRolePanel(authUser){
     }else {
         $('#userTab').addClass('active')
         $('#userPage').addClass('active show')
-        $('#adminTab').hide()
+        $('#adminTab').hide(true)
+        $('#adminPage').hide()
+        $('#myTab').hide()
+        $('#newUser').hide()
     }
     roleStr=''
 }
