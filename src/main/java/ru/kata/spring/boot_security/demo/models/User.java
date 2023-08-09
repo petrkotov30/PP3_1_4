@@ -35,8 +35,6 @@ public class User implements UserDetails {
     @Min(value = 0)
     private int age;
 
-    //    @ManyToMany(fetch = FetchType.LAZY)
-//    @LazyCollection(LazyCollectionOption.EXTRA)
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",

@@ -17,16 +17,16 @@
     <div class="row ">
         <div class="col-md-12 bg-dark text-white">
             <nav class="navbar navbar-dark bg-dark">
-                <span class="navbar-text">
-                    <span th:text="${#authentication.name}"></span>
-                    <!--                    <span th:text=" with roles "></span>-->with roles:
-                    <span th:text="${admin.toStringRoles().replace('ROLE_',' ')}"></span>
+                <span class="navbar-brand text-white">
+                    <span th:text="${#authentication.name}"></span> with roles:
+                    <span th:text="${admin.toStringRoles().replaceAll('ROLE_','')}"></span>
                 </span>
-                <a class="nav-item text-white nav-link  mr-sm-2 " href="/logout">Logout</a>
+                <a class="btn btn-link text-secondary" href="/logout">Logout</a>
             </nav>
         </div>
 
     </div>
+</div>
 
     <div class="row ">
         <div class="col-md-12 bg-light">
@@ -41,7 +41,7 @@
                     <a class="nav-link active" href="/admin">Admin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">User</a>
+                    <a class="nav-link" href="/admin/info">User</a>
                 </li>
             </ul>
         </div>
@@ -96,7 +96,7 @@
                                     <label for="Role">Role</label>
                                     <select multiple class="form-control" id="Role" name="roles" size="2">
                                         <option th:each="role : ${roles}" th:value="${role.getId()}"
-                                                th:text="${role.getName()}">role
+                                                th:text="${role.getName().replaceAll('ROLE_','')}">role
                                         </option>
                                     </select>
                                 </div>
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-</div>
+</tbody>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
