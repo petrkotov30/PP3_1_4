@@ -17,15 +17,16 @@
     <div class="row ">
         <div class="col-md-12 bg-dark text-white">
             <nav class="navbar navbar-dark bg-dark">
-                <span class="navbar-text">
-                    <span th:text="${#authentication.name}"></span>
-                    with roles: <span th:each="role : ${#authentication.authorities}"
-                                      th:text="${role.getAuthority().replace('ROLE_',' ')}"></span>
+                <span class="navbar-brand text-white">
+                    <span th:text="${#authentication.name}"></span> with roles:
+                    <span th:text="${user.toStringRoles().replaceAll('ROLE_','')}"></span>
                 </span>
-                <a class="nav-item text-white nav-link  mr-sm-2 " href="/logout">Logout</a>
+                <a class="btn btn-link text-secondary" href="/logout">Logout</a>
             </nav>
         </div>
+
     </div>
+</div>
 
     <div class="row ">
         <div class="col-md-12 bg-light">
@@ -66,7 +67,7 @@
                     <td th:text="${user.getSurname()}"></td>
                     <td th:text="${user.getAge()}"></td>
                     <td th:text="${user.getEmail()}"></td>
-                    <td th:text="${user.getRoles()}"></td>
+                    <td th:text="${user.toStringRoles().replaceAll('ROLE_','')}"></td>
                 </tr>
             </table>
         </div>

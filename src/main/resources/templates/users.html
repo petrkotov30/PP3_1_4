@@ -11,22 +11,23 @@
 
     <title>Admin panel</title>
 </head>
-<tbody>
+<body style="background-color: whitesmoke">
 
 <div class="container-fluid bg-light">
     <div class="row ">
         <div class="col-md-12 bg-dark text-white">
             <nav class="navbar navbar-dark bg-dark">
-                <span class="navbar-text">
+                <span class="navbar-brand text-white">
                     <span th:text="${#authentication.name}"></span> with roles:
-                    <span th:text="${admin.toStringRoles()}"></span>
+                    <span th:text="${admin.toStringRoles().replaceAll('ROLE_','')}"></span>
                 </span>
-                <a class="nav-item text-white nav-link  mr-sm-2 " href="/logout">Logout</a>
+                <a class="btn btn-link text-secondary" href="/logout">Logout</a>
             </nav>
         </div>
 
     </div>
 </div>
+
 
 
 <div class="row ">
@@ -84,7 +85,7 @@
                 <td th:text="${user.getSurname()}"></td>
                 <td th:text="${user.getAge()}"></td>
                 <td th:text="${user.getEmail()}"></td>
-                <td th:text="${user.toStringRoles()}"></td>
+                <td th:text="${user.toStringRoles().replaceAll('ROLE_','')}"></td>
                 <td>
                     <!-- Button Edit trigger modal -->
                     <button type="button" class="btn btn-info" data-toggle="modal"
