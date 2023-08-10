@@ -46,12 +46,6 @@ public class AdminController {
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    @GetMapping("/currentUser")
-    public ResponseEntity<User> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return ResponseEntity.ok((User) authentication.getPrincipal());
-    }
-
     @PatchMapping("/users/edit")
     public ResponseEntity<HttpStatus> updateUser(User user) {
         userService.update(user);

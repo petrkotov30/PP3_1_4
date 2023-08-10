@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,12 @@ public class WelcomeController {
             addFirstUser();
         }
         return "index";
+    }
+
+    @GetMapping("/api/login")
+    public ResponseEntity<User> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok((User) authentication.getPrincipal());
     }
 
     @GetMapping("/admin")

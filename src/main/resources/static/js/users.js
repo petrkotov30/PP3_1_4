@@ -6,9 +6,10 @@ $(document).ready(function(){
 })
 const allRoles = fetch('/admin/roles')
     .then(response => response.json())
-
+const userRole = fetch("/user/roles")
+    .then(response => response.json())
 //заполнение выбора роли
-allRoles.then(e => {
+userRole.then(e => {
     let cod = ``
     for (const i in e) {
         cod += `<option value = ${e[i].id}>${e[i].name.replace("ROLE_", "")}</option>`
@@ -31,7 +32,7 @@ function getAllUser(){
 function getAuthorizeUser (){
     $.ajax({
         type: 'get',
-        url: '/admin/currentUser',
+        url: '/api/login',
         response: 'json',
         success: function (data){
             setRolePanel(data);
@@ -98,16 +99,15 @@ function setRolePanel(authUser){
     $.each(authUser.roles,function (i,role){
         roleStr += role.name
     })
-    if(roleStr.indexOf('ADMIN') >=0){
+    if(roleStr.indexOf('ROLE_ADMIN') >=0 ){
         $('#adminTab').addClass('active')
         $('#adminPage').addClass('active show')
-    }else {
+    }else if(roleStr.indexOf('ROLE_USER') >=0 ) {
+        console.log(roleStr)
         $('#userTab').addClass('active')
         $('#userPage').addClass('active show')
-        $('#adminTab').hide(true)
-        $('#adminPage').hide()
-        $('#myTab').hide()
-        $('#newUser').hide()
+        $('#adminTable').hide()
+        $('#adminTab').hide()
     }
     roleStr=''
 }
