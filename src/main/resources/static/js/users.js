@@ -4,8 +4,8 @@ $(document).ready(function(){
     getAuthorizeUser()
     getAllUser()
 })
-const allRoles = fetch('/admin/roles')
-    .then(response => response.json())
+// const allRoles = fetch('/admin/roles')
+//     .then(response => response.json())
 const userRole = fetch("/user/roles")
     .then(response => response.json())
 //заполнение выбора роли
