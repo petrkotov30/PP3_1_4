@@ -2,13 +2,13 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,6 +21,7 @@ public class User implements UserDetails {
     @Column(name = "username")
     @Size(min = 2, max = 20, message = "имя должно содержать от 2 до 20 символов")
     @NotEmpty
+    @UniqueElements
     private String username;
     @Column(name = "surname")
     @Size(min = 2, max = 20, message = "фамилия должна содержать от 2 до 20 символов")

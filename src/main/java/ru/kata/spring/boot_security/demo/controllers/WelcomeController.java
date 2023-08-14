@@ -12,7 +12,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 public class WelcomeController {
-    final UserService userService;
+    private final UserService userService;
 
     public WelcomeController(UserService userService) {
         this.userService = userService;
@@ -29,29 +29,33 @@ public class WelcomeController {
     @GetMapping("/api/login")
     public ResponseEntity<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getPrincipal());
+        System.out.println(authentication.getDetails());
+        System.out.println(authentication.getAuthorities());
+        System.out.println(authentication.getCredentials());
         return ResponseEntity.ok((User) authentication.getPrincipal());
     }
 
     @GetMapping("/admin")
-    public String printAdminPage (ModelMap model, Authentication authentication){
-        model.addAttribute("nawUser",(User)authentication.getPrincipal());
+    public String printAdminPage(ModelMap model, Authentication authentication) {
+        model.addAttribute("nawUser", (User) authentication.getPrincipal());
         return "admin/aUsers";
     }
 
     @GetMapping("/user")
-    public String printUserPage (ModelMap model, Authentication authentication){
-        model.addAttribute("nawUser",(User)authentication.getPrincipal());
+    public String printUserPage(ModelMap model, Authentication authentication) {
+        model.addAttribute("nawUser", (User) authentication.getPrincipal());
         return "admin/aUsers";
     }
 
-    public void addFirstUser(){
+    public void addFirstUser() {
         User user = new User();
         user.setUsername("admin");
         user.setSurname("admin");
         user.setAge(25);
         user.setEmail("admin@mail.ru");
         user.setPassword("admin");
-        user.getRoles().add(new Role( "ROLE_ADMIN"));
+        user.getRoles().add(new Role("ROLE_ADMIN"));
         userService.add(user);
     }
 }

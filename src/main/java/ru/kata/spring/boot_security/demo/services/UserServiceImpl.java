@@ -67,6 +67,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+        if (userRepository.findUserById(id) == null) {
+            throw new UserNotFoundException();
+        }
         userRepository.deleteById(id);
     }
 
